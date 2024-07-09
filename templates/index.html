@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% block main %}
+<div class="container text-center">
+    <div id="main-container" class="d-flex flex-column align-items-stretch justify-content-center">
+        <h1 class="league-gothic">YouTranslate</h1>
+        <div class="d-flex justify-content-center">
+            <form method="post" action="/">
+                <div class="input-group">
+                    <input name="link" autofocus id="search-field" type="text" class="form-control"
+                        placeholder="YouTube video link" aria-label="Recipient's username with two button addons">
+                    <button disabled id="submit-btn" class="btn btn-outline-danger" type="submit"><b>Go</b></button>
+                </div>
+
+                <select name="language" class="form-select mt-3">
+                    <option value="0" selected>Your language</option>
+                    {% for l in langs %}
+                    <option value="{{l}}">{{ langs[l] }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="message-container">
+
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        let url_field = document.getElementById('search-field');
+        let button = document.getElementById('submit-btn');
+
+        url_field.addEventListener('input', async function () {
+            if (button && url_field.value != '') {
+                button.disabled = false;
+            }
+            else {
+                button.disabled = true;
+            }
+        });
+
+        button.addEventListener('click', function () {
+
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block header %}
+<div class="d-flex flex-wrap justify-content-center py-1 mb-2 border-bottom">
+    <a href="/" class="mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <h1 class="mx-4 league-gothic">YouTranslate</h1>
+    </a>
+</div>
+{% endblock %}
+{% block main %}
+
+<div id="video-container" class="container-fluid d-flex flex-column text-center">
+    <div class="row flex-grow-1 align-items-center">
+        <div class="col">
+            <div id="player"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var audio = new Audio(`{{audio_path}}`);
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '360',
+            width: '640',
+            videoId: `{{video_id}}`,
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        player.mute();
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+
+            rewind_audio(player.getCurrentTime());
+            audio.play();
+        }
+
+        else if (event.data != YT.PlayerState.PLAYING) {
+            audio.pause();
+        }
+
+    }
+
+    function rewind_audio(video_time) {
+        audio.currentTime = video_time;
+        if (audio.readyState < 3)
+        {   
+            player.stopVideo();
+            check_time = setInterval(function () {
+                if (audio.readyState >= 3) {
+                    player.play();
+                    clearInterval(check_time);
+                };
+            }, 200)
+        }
+    }
+
+</script>
+{% endblock %}

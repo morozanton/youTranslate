@@ -1,0 +1,8 @@
+flask~=2.3.2
+selenium~=4.11.2
+ruaccent~=1.5.6.3
+gTTS~=2.5.1
+requests~=2.31.0
+python-dotenv~=1.0.0
+pydub~=0.25.1
+# FFmpeg as per winget install "FFmpeg (Essentials Build)" in case of windows
