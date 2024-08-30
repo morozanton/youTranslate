@@ -2,7 +2,7 @@
 
 #### Video Demo:  https://www.loom.com/share/e6ba1fe4e6aa4093844cac0dcadd1be3
 
-#### Description: A web applications that translates YouTube videos into 59 languages
+#### Description: A web application that translates YouTube videos into 59 languages
 
 By ***Anton Moroz***
 
@@ -17,26 +17,26 @@ Github: **morozanton**
 - [python-dotenv](https://pypi.org/project/python-dotenv/) ~= 1.0.0
 - [pydub](https://pypi.org/project/pydub/) ~= 0.25.1
 
-`audio_processor.py` requires "FFmpeg (Essentials Build)" that has to be installed separately.
+`audio_processor.py` requires "FFmpeg (Essentials Build)" which has to be installed separately.
 
 # app.py
 
-The Flask application file that contains only one "/" route.
+The Flask application file contains only one "/" route.
 Uses three templates:
 
 1. *layout.html* contains the `<head>` and `<footer>`
-2. *index.html* contains a `post` request form for passing the video url and desired translation language. This page
+2. *index.html* contains a `post` request form for passing the video URL and desired translation language. This page
    handles form errors with Flask [flash](https://flask.palletsprojects.com/en/2.3.x/patterns/flashing/)
 3. *watch.html* embeds the YouTube video into `<iframe>` and contains the Javascript code for controlling the translated
    audio.
-   It makes sure the audio timing matches with video even upon rewinding.
+   It makes sure the audio timing matches with the video even upon rewinding.
 
 **TODO:** I tried passing "status messages" describing each translation step to *index.html*
 using [SocketIo](https://flask-socketio.readthedocs.io/en/latest/) because video translation takes considerable time,
 but did not succeed.
 
 The TTS part could have been done better voice-wise, but Google's API is free and supports many languages. In general,
-the resulting audios are very slow, and require additional processing.
+the resulting audios are very slow and require additional processing.
 
 ## index
 
